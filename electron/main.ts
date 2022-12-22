@@ -1,6 +1,7 @@
-import { app, BrowserWindow } from 'electron';
+import { app, BrowserWindow, ipcMain } from 'electron';
 import * as path from 'path';
 import installExtension, { REACT_DEVELOPER_TOOLS } from "electron-devtools-installer";
+import { getDocumentByClassName, getDocumentById, launchWindow } from './siteWindow';
 
 function createWindow() {
   const win = new BrowserWindow({
@@ -54,3 +55,20 @@ app.whenReady().then(() => {
     }
   });
 });
+
+ipcMain.on('launch', (event: any, data: string) => {
+  launchWindow(data)
+})
+
+ipcMain.on('get_element_by_id', (event: any, data: string) => {
+  const element = getDocumentById(data)
+  console.log(element?.id)
+  console.log("byclass")
+})
+
+ipcMain.on('get_element_by_class', (event: any, data: string) => {
+  const element = getDocumentByClassName(data)
+  console.log(element?.className)
+  console.log("byid")
+})
+
