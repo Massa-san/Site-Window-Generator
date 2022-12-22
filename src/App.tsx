@@ -1,12 +1,12 @@
 import './App.css';
 import { useState } from 'react';
 
+var siteWindow: Window | null = null
+
 function App() {
   const [url, setUrl] = useState('');
   const [id, setId] = useState('');
   const [className, setClassName] = useState('');
-
-  let siteWindow: Window | null = null
 
   function launch() {
     window.api.launch(url)

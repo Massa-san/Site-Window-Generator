@@ -1,7 +1,8 @@
-import { app, BrowserWindow, ipcMain } from 'electron';
+import { app, BrowserWindow } from 'electron';
 import * as path from 'path';
 import installExtension, { REACT_DEVELOPER_TOOLS } from "electron-devtools-installer";
-import { getDocumentByClassName, getDocumentById, launchWindow } from './siteWindow';
+
+app.commandLine.appendSwitch('disable-site-isolation-trials')
 
 function createWindow() {
   const win = new BrowserWindow({
@@ -9,7 +10,8 @@ function createWindow() {
     height: 600,
     webPreferences: {
       // contextIsolation: false,
-      preload: path.join(__dirname, 'preload.js')
+      preload: path.join(__dirname, 'preload.js'),
+      webSecurity: false
     }
   })
 
@@ -55,20 +57,3 @@ app.whenReady().then(() => {
     }
   });
 });
-
-ipcMain.on('launch', (event: any, data: string) => {
-  launchWindow(data)
-})
-
-ipcMain.on('get_element_by_id', (event: any, data: string) => {
-  const element = getDocumentById(data)
-  console.log(element?.id)
-  console.log("byclass")
-})
-
-ipcMain.on('get_element_by_class', (event: any, data: string) => {
-  const element = getDocumentByClassName(data)
-  console.log(element?.className)
-  console.log("byid")
-})
-
