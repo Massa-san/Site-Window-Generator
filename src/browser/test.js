@@ -1,48 +1,36 @@
 import React from "react";
 import { useState } from 'react';
 
-var siteWindow: Window | null = null
+let siteWindow = null;
 
 const TestModule = () => {
 
-    const [url, setUrl] = useState('');
+    const [url, setUrl] = useState('https://www.google.com/');
     const [id, setId] = useState('');
     const [className, setClassName] = useState('');
   
-    function launch() {
-      window.api.launch(url)
-    }
-  
+    
     function getDocumentById() {
-      window.api.getDocumentById(id)
-    }
-  
-    function getDocumentByClassName() {
-      window.api.getDocumentByClassName(className)
-    }
-  
-    function clickClassName() {
-      window.api.click(className)
+        siteWindow.getDocumentById(id)
     }
   
     function openWindow() {
-      siteWindow = window.open(url, '', 'width=800,height=600')
+        siteWindow = window.open(url, '', 'width=800,height=600')
     }
   
     function getElementByClassName() {
-      const element = siteWindow?.document.getElementsByClassName(className)
-      if (element === undefined) {
-        console.log("Elementの取得に失敗しました")
-      } else {
-        console.log(element[0])
-      }
+        const element = siteWindow?.document.getElementsByClassName(className)
+        if (element === undefined) {
+            console.log("Elementの取得に失敗しました")
+        } else {
+            console.log(element[0])
+        }
     }
 
     return (
         <div className="App">
           <header className="App-header">
             <input type="text" value={url} onChange={(event) => setUrl(event.target.value)} />
-            <button onClick={launch}>Launch site</button>
             <button onClick={openWindow}>Launch site Test</button>
             <br />
     
@@ -51,9 +39,7 @@ const TestModule = () => {
             <br />
     
             <input type="text" value={className} onChange={(event) => setClassName(event.target.value)} />
-            <button onClick={getDocumentByClassName}>getElement(ClassName)</button>
-            <button onClick={getElementByClassName}>getElement(ClassName) Test</button>
-            <button onClick={clickClassName}>click(ClassName)</button>
+            <button onClick={getElementByClassName}>getElement(ClassName)</button>
             <br />
           </header>
         </div>
