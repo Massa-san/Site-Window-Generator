@@ -1,6 +1,6 @@
 import './App.css';
 import { useState } from 'react';
-import TestModule from './browser/test';
+import TestModule from '../browser/test';
 
 
 function App() {
