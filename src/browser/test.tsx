@@ -1,5 +1,6 @@
 import React from "react";
 import { useState } from 'react';
+import { utilTest } from "../util/UtilTest";
 import "./test.css";
 
 let siteWindow : Window | null = null;
@@ -43,6 +44,7 @@ const TestModule = () => {
                     <input type="text" value={className} onChange={(event) => setClassName(event.target.value)} />
                     <button onClick={getElementByClassName}>getElement(ClassName)</button>
                 </div>
+                <button onClick={utilTest}>Test</button>
             </div>
         </div>
       );
