@@ -2,6 +2,8 @@ import { app, BrowserWindow } from 'electron';
 import * as path from 'path';
 import installExtension, { REACT_DEVELOPER_TOOLS } from "electron-devtools-installer";
 
+process.env.ELECTRON_DISABLE_SECURITY_WARNINGS = '1';
+
 app.commandLine.appendSwitch('disable-site-isolation-trials')
 
 function createWindow() {
