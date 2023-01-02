@@ -1,4 +1,3 @@
-import React from "react";
 import { useState } from 'react';
 import { utilTest } from "../util/UtilTest";
 import "./test.css";
@@ -51,3 +50,7 @@ const TestModule = () => {
 }; 
 
 export default TestModule
+
+window.electron.ipcRenderer.on('test', async (data) => {
+    // TODO
+})

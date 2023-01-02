@@ -1,10 +1,15 @@
 import { app, BrowserWindow } from 'electron';
 import * as path from 'path';
 import installExtension, { REACT_DEVELOPER_TOOLS } from "electron-devtools-installer";
+import { init_Discord } from './discord';
 
 process.env.ELECTRON_DISABLE_SECURITY_WARNINGS = '1';
 
 app.commandLine.appendSwitch('disable-site-isolation-trials')
+
+init_Discord()
+
+export let mainWindow: BrowserWindow | null = null
 
 function createWindow() {
   const win = new BrowserWindow({
@@ -17,6 +22,7 @@ function createWindow() {
       webSecurity: false
     }
   })
+  mainWindow = win
 
   if (app.isPackaged) {
     // 'build/index.html'
@@ -60,3 +66,4 @@ app.whenReady().then(() => {
     }
   });
 });
+
