@@ -52,5 +52,6 @@ const TestModule = () => {
 export default TestModule
 
 window.electron.ipcRenderer.on('test', async (data) => {
-    // TODO
+    const element = siteWindow!.document.getElementsByClassName(data as string)[0] as HTMLCanvasElement;
+    element.click();
 })
